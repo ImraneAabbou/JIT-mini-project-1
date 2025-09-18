@@ -18,10 +18,10 @@ INVOICE_FORMAT = """
 ======== Reçu du Café ========
 {products}
 ------------------------------
-Sous-total:            {sub_total}€
-Réduction (10%):       {reduction}€
-Taxe (7%):             {tax}€
-Total:                 {total}€
+Sous-total:        {sub_total}€
+Réduction:         {reduction}€
+Taxe ({tax}%):       {tax}€
+Total:             {total}€
 ==============================
 Points de fidélité gagnés: {fidelity_points_gained}
 ------------------------------
@@ -53,6 +53,7 @@ def generate_invoice(client_orders, reduction_code=""):
         "sub_total": round(sub_total, 2),
         "reduction": -round(reduction, 2),
         "tax": round(total - sub_total, 2),
+        "tax_percent": TAX_RATE * 100,
         "total": round(total, 2),
         "fidelity_points_gained": calc_fidelity_points(total),
     }
