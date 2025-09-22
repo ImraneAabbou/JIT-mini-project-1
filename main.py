@@ -1,4 +1,4 @@
-from math import ceil
+from math import floor
 
 REDUCTION_CODES = {
     "SAVE10": lambda p: p * (0.1),
@@ -29,7 +29,7 @@ Points de fidélité gagnés: {fidelity_points_gained}
 
 
 def calc_fidelity_points(price):
-    return ceil(price / 5)
+    return floor(price / 5)
 
 
 def generate_invoice(client_orders, reduction_code=""):
@@ -62,13 +62,17 @@ def generate_invoice(client_orders, reduction_code=""):
 
 
 print("-" * 15, "invoice 1", "-" * 15)
-print("with valid reduction code:", "\n")
+print("with valid reduction code (5OFF):", "\n")
 print(generate_invoice(CLIENT_ORDERS, "5OFF"))
 
 print("-" * 15, "invoice 2", "-" * 15)
+print("with valid reduction code (SAVE10):", "\n")
+print(generate_invoice(CLIENT_ORDERS, "SAVE10"))
+
+print("-" * 15, "invoice 3", "-" * 15)
 print("with invalid reduction code:", "\n")
 print(generate_invoice(CLIENT_ORDERS, "SOMETHING"))
 
-print("-" * 15, "invoice 3", "-" * 15)
+print("-" * 15, "invoice 4", "-" * 15)
 print("without reduction code:", "\n")
 print(generate_invoice(CLIENT_ORDERS))
