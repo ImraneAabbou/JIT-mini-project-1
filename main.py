@@ -20,7 +20,7 @@ INVOICE_FORMAT = """
 ------------------------------
 Sous-total:        {sub_total}€
 Réduction:         {reduction}€
-Taxe ({tax}%):       {tax}€
+Taxe ({tax_rate_percent}%):       {tax_price}€
 Total:             {total}€
 ==============================
 Points de fidélité gagnés: {fidelity_points_gained}
@@ -52,8 +52,8 @@ def generate_invoice(client_orders, reduction_code=""):
         ),
         "sub_total": round(sub_total, 2),
         "reduction": -round(reduction, 2),
-        "tax": round(total - sub_total, 2),
-        "tax_percent": TAX_RATE * 100,
+        "tax_price": round(total - sub_total, 2),
+        "tax_rate_percent": TAX_RATE * 100,
         "total": round(total, 2),
         "fidelity_points_gained": calc_fidelity_points(total),
     }
